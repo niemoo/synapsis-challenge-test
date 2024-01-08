@@ -1,4 +1,5 @@
 'use client';
+import Header from '@/components/Header';
 import { useEffect, useState } from 'react';
 import { getDataResponse } from '../libs/api-libs';
 
@@ -29,22 +30,29 @@ const Post = () => {
   };
 
   return (
-    <section className="text-white">
-      <h1>asd</h1>
-      {postData?.map((postData) => (
-        <div key={postData.id} className="">
-          <h1 className="bg-red-500">{postData.title}</h1>
-          <p className="bg-blue-500">{postData.body}</p>
-        </div>
-      ))}
+    <main className="max-w-screen-xl mx-auto">
+      <Header title={`All Post #${page}`} />
+      <section className="flex gap-5">
+        {postData?.map((postData) => (
+          <div key={postData.id} className="p-4 w-1/5 border border-gray-500 rounded-xl bg-white shadow-xl">
+            <h1 className="font-semibold mb-5">{postData.title}</h1>
+            <hr className="mb-5" />
+            <p className="flex-grow text-gray-600">{postData.body}</p>
+          </div>
+        ))}
+      </section>
 
       {/* Pagination */}
-      <div>
-        <button onClick={handlePreviousPage}>Previous</button>
-        <h1>{page}</h1>
-        <button onClick={handleNextPage}>Next</button>
+      <div className="flex justify-center mt-10">
+        <button onClick={handlePreviousPage} className="font-semibold hover:bg-white rounded-md py-2 px-3">
+          {`< Previous`}
+        </button>
+        <h1 className="flex items-center mx-5 font-semibold">{page}</h1>
+        <button onClick={handleNextPage} className="font-semibold hover:bg-white rounded-md py-2 px-3">
+          {`Next >`}
+        </button>
       </div>
-    </section>
+    </main>
   );
 };
 

@@ -6,7 +6,7 @@ const Home = async () => {
   const postData = await getDataResponse('/posts', 'page=1&per_page=5');
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex flex-col items-center max-w-screen-xl mx-auto">
       <Header title="Post" linkHref="/post" />
       <PostSection data={postData} />
     </main>
