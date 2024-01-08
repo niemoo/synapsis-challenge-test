@@ -1,16 +1,17 @@
 'use client';
 import Header from '@/components/Header';
+import PostSection from '@/components/PostSection';
 import { useEffect, useState } from 'react';
 import { getDataResponse } from '../libs/api-libs';
 
-const Post = () => {
+const Posts = () => {
   const [postData, setPostData] = useState();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getDataResponse('/posts', `page=${page}&per_page=15`);
+        const data = await getDataResponse('/posts', `page=${page}&per_page=20`);
         setPostData(data);
       } catch (err) {
         console.error(err);
@@ -19,28 +20,29 @@ const Post = () => {
     fetchData();
   }, [page]);
 
+  const scrollTop = () => {
+    scrollTo({
+      behavior: 'smooth',
+      top: 0,
+    });
+  };
+
   const handlePreviousPage = () => {
     if (page > 1) {
+      scrollTop();
       setPage((prevState) => prevState - 1);
     }
   };
 
   const handleNextPage = () => {
     setPage((prevState) => prevState + 1);
+    scrollTop();
   };
 
   return (
     <main className="max-w-screen-xl mx-auto">
       <Header title={`All Post #${page}`} />
-      <section className="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-5">
-        {postData?.map((postData) => (
-          <div key={postData.id} className="p-4 w-full border border-gray-500 rounded-xl bg-white shadow-xl">
-            <h1 className="font-semibold mb-5 line-clamp-2">{postData.title}</h1>
-            <hr className="mb-5" />
-            <p className="flex-grow text-gray-600">{postData.body}</p>
-          </div>
-        ))}
-      </section>
+      <PostSection data={postData} />
 
       {/* Pagination */}
       <div className="flex justify-center mt-10">
@@ -56,4 +58,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Posts;

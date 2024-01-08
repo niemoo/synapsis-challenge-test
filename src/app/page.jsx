@@ -7,7 +7,7 @@ const Home = async () => {
 
   return (
     <main className="flex flex-col items-center max-w-screen-xl mx-auto">
-      <Header title="Post" linkHref="/post" />
+      <Header title="Post" linkHref="/posts" />
       <PostSection data={postData} />
     </main>
   );
