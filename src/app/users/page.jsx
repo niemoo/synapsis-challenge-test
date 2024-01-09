@@ -1,5 +1,5 @@
 'use client';
-import AddBar from '@/components/AddBar';
+import AddBar from '@/components/AddButton';
 import SearchBar from '@/components/SearchBar';
 import UsersList from '@/components/UsersList';
 import Pagination from '@/components/utils/Pagination';
