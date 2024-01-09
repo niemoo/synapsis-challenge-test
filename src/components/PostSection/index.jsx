@@ -11,7 +11,7 @@ const PostSection = ({ data }) => {
   };
 
   return (
-    <section className="grid md:grid-cols-5 sm:grid-cols-3 gap-5">
+    <section className="grid md:grid-cols-5 sm:grid-cols-3  gap-5">
       {data?.map((data) => {
         return (
           <div key={data.id} className="relative p-4 w-full border border-gray-500 rounded-xl bg-white shadow-xl">
