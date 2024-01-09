@@ -8,12 +8,12 @@ const Button = ({ title, icon, modal: ModalComponent, className, oldName, oldEma
   const handleOpen = () => setOpen(!open);
 
   return (
-    <div className="mb-5">
+    <div className="">
       <button onClick={handleOpen} title="Add New User" className={`${className} flex items-center gap-2 rounded-md p-3 border border-gray-500 w-fit`}>
         {icon}
         <h3>{title}</h3>
       </button>
-      <ModalComponent open={open} handleOpen={handleOpen} oldName={oldName} oldEmail={oldEmail} oldGender={oldGender} oldStatus={oldStatus} />
+      <ModalComponent open={open} handleOpen={handleOpen} oldName={oldName} oldEmail={oldEmail} oldGender={oldGender} oldStatus={oldStatus} userID={userID} />
     </div>
   );
 };

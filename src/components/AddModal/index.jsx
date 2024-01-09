@@ -4,11 +4,15 @@ import { Button, Dialog, DialogFooter, Input } from '@material-tailwind/react';
 import axios from 'axios';
 import { useState } from 'react';
 
-const AddModal = ({ open, handleOpen }) => {
+const AddModal = ({ icon, title }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [gender, setGender] = useState('male');
   const [status, setStatus] = useState('active');
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(!open);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -36,46 +40,54 @@ const AddModal = ({ open, handleOpen }) => {
 
       console.log(res);
       if (res.status == 201) {
-        alert('success');
+        alert('success add data');
       }
-      //   window.location.reload();
+      window.location.reload();
     } catch (err) {
+      alert('Email already used !');
       console.error(`Error : ${err}`);
     }
   };
 
   return (
-    <Dialog open={open} handler={handleOpen} className="font-inter">
-      <form className="flex flex-col gap-5 p-5">
-        <h1 className="font-bold text-black">ADD NEW USER</h1>
-        <Input label="Name" onChange={handleNameChange} required />
-        <Input label="Email" onChange={handleEmailChange} required />
-        <select label="Select Gender" onChange={handleGenderChange}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        <select label="Select Status" onChange={handleStatusChange}>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-      </form>
+    <div>
+      <button onClick={handleOpen} title="Add New User" className={`bg-green-400 hover:bg-green-600 flex items-center gap-2 rounded-md p-3 border border-gray-500 w-fit`}>
+        {icon}
+        <h3>{title}</h3>
+      </button>
 
-      <DialogFooter className="font-inter">
-        <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
-          <span>Cancel</span>
-        </Button>
-        <Button
-          variant="gradient"
-          color="green"
-          onClick={() => {
-            handleOpen();
-            handleAddDataUser();
-          }}
-        >
-          <span>Confirm</span>
-        </Button>
-      </DialogFooter>
-    </Dialog>
+      <Dialog open={open} handler={handleOpen} className="font-inter">
+        <form className="flex flex-col gap-5 p-5">
+          <h1 className="font-bold text-black">ADD NEW USER</h1>
+          <Input label="Name" onChange={handleNameChange} required />
+          <Input label="Email" onChange={handleEmailChange} required />
+          <select label="Select Gender" onChange={handleGenderChange} className="p-2 border border-gray-500 rounded-md">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <select label="Select Status" onChange={handleStatusChange} className="p-2 border border-gray-500 rounded-md">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </form>
+
+        <DialogFooter className="font-inter">
+          <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
+            <span>Cancel</span>
+          </Button>
+          <Button
+            variant="gradient"
+            color="green"
+            onClick={() => {
+              handleOpen();
+              handleAddDataUser();
+            }}
+          >
+            <span>Confirm</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+    </div>
   );
 };
 

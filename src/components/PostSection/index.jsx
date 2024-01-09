@@ -19,7 +19,7 @@ const PostSection = ({ data }) => {
             <hr className="mb-5" />
             <p className="flex-grow text-gray-600 mb-10">{limitBodyText(data.body, 150)}</p>
 
-            <Link href={`/post/${data.id}`} className="absolute bottom-2 right-2 bg-emerald-300 hover:bg-emerald-500 rounded-full p-3">
+            <Link href={`/post/${data.id}`} className="absolute bottom-2 right-2 bg-teal-300 hover:bg-teal-500 rounded-full p-3">
               <FaExternalLinkAlt className="text-xl" />
             </Link>
           </div>

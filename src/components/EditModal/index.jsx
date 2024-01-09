@@ -1,14 +1,18 @@
 'use client';
 
-import { Button, Dialog, DialogFooter, Input } from '@material-tailwind/react';
+import { Button, Dialog } from '@material-tailwind/react';
 import axios from 'axios';
 import { useState } from 'react';
 
-const EditModal = ({ open, handleOpen, oldName, oldEmail, oldGender, oldStatus }) => {
+const EditModal = ({ icon, title, userID, oldName, oldEmail, oldGender, oldStatus }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [gender, setGender] = useState('male');
   const [status, setStatus] = useState('active');
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(!open);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -26,56 +30,63 @@ const EditModal = ({ open, handleOpen, oldName, oldEmail, oldGender, oldStatus }
     setStatus(e.target.value);
   };
 
-  const handleAddDataUser = async () => {
+  const handleEditDataUser = async () => {
     try {
-      if (!name || !email || !gender || !status) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-      const res = await axios.post('https://gorest.co.in/public/v2/users?access-token=e835f26cf43cf244c017e2ae7ee7d26c03ae6495750eb08c5a5dccd5ec2d5568', { name: name, email: email, gender: gender, status: status });
+      const res = await axios.put(`https://gorest.co.in/public/v2/users/${userID}?access-token=e835f26cf43cf244c017e2ae7ee7d26c03ae6495750eb08c5a5dccd5ec2d5568`, {
+        name: name || oldName,
+        email: email || oldEmail,
+        gender: gender || oldGender,
+        status: status || oldStatus,
+      });
 
-      console.log(res);
-      if (res.status == 201) {
-        alert('success');
+      if (res.status == 200) {
+        alert('Success Edit Data');
       }
-      //   window.location.reload();
+      window.location.reload();
     } catch (err) {
+      console.log(userID);
       console.error(`Error : ${err}`);
     }
   };
 
   return (
-    <Dialog open={open} handler={handleOpen} className="font-inter">
-      <form className="flex flex-col gap-5 p-5">
-        <h1 className="font-bold text-black">EDIT DATA USER</h1>
-        <Input label="Name" onChange={handleNameChange} required />
-        <Input label="Email" onChange={handleEmailChange} required />
-        <select label="Select Gender" onChange={handleGenderChange}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        <select label="Select Status" onChange={handleStatusChange}>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-      </form>
+    <div>
+      <button onClick={handleOpen} title="Add New User" className={`bg-green-400 hover:bg-green-600 flex items-center gap-2 rounded-md p-3 border border-gray-500 w-fit`}>
+        {icon}
+        <h3>{title}</h3>
+      </button>
 
-      <DialogFooter className="font-inter">
-        <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
-          <span>Cancel</span>
-        </Button>
-        <Button
-          variant="gradient"
-          color="green"
-          onClick={() => {
-            handleOpen();
-            handleAddDataUser();
-          }}
-        >
-          <span>Confirm</span>
-        </Button>
-      </DialogFooter>
-    </Dialog>
+      <Dialog open={open} handler={handleOpen} className="font-inter">
+        <form className="flex flex-col gap-5 p-5">
+          <h1 className="font-bold text-black">EDIT DATA USER</h1>
+          <input label="Name" placeholder={oldName} onChange={handleNameChange} className="text-black p-2 border border-gray-500 rounded-md" />
+          <input label="Email" placeholder={oldEmail} onChange={handleEmailChange} className="text-black p-2 border border-gray-500 rounded-md" />
+          <select label="Select Gender" onChange={handleGenderChange} defaultValue={oldGender} className="p-2 border border-gray-500 rounded-md">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <select label="Select Status" onChange={handleStatusChange} defaultValue={oldStatus} className="p-2 border border-gray-500 rounded-md">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+
+          <div className="flex justify-end">
+            <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
+              <span>Cancel</span>
+            </Button>
+            <Button
+              className="bg-green-500 hover:bg-green-700"
+              onClick={() => {
+                handleOpen();
+                handleEditDataUser();
+              }}
+            >
+              <span>Confirm</span>
+            </Button>
+          </div>
+        </form>
+      </Dialog>
+    </div>
   );
 };
 

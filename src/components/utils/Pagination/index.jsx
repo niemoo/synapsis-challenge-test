@@ -20,7 +20,7 @@ const Pagination = ({ page, setPage }) => {
 
   return (
     <section className="flex justify-center mt-10">
-      <button onClick={handlePreviousPage} className={`font-semibold rounded-md py-2 px-3 ${page === 1 ? 'text-zinc-500' : 'hover:bg-white'}`} disabled={page === 1}>
+      <button onClick={handlePreviousPage} className={`font-semibold rounded-md py-2 px-3 ${page === 1 ? 'text-gray-500' : 'hover:bg-white'}`} disabled={page === 1}>
         {`< Previous`}
       </button>
       <h1 className="flex items-center mx-5 font-semibold">{page}</h1>
