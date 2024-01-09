@@ -2,7 +2,7 @@
 import SearchBar from '@/components/SearchBar';
 import UsersList from '@/components/UsersList';
 import Pagination from '@/components/utils/Pagination';
-import AddModal from '@/components/AddModal';
+import AddModal from '@/components/Modal/AddModal';
 import { IoPersonAdd } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { getDataResponse } from '../libs/api-libs';

@@ -1,8 +1,7 @@
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
-import Button from '@/components/Button';
-import EditModal from '../EditModal';
-import DeleteModal from '../DeleteModal';
+import EditModal from '../Modal/EditModal';
+import DeleteModal from '../Modal/DeleteModal';
 
 const UsersList = ({ data }) => {
   return (

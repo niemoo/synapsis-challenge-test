@@ -1,6 +1,6 @@
 'use client';
 import { IoPersonAdd } from 'react-icons/io5';
-import AddModal from '@/components/AddModal';
+import AddModal from '@/components/Modal/AddModal';
 import UsersList from '@/components/UsersList';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

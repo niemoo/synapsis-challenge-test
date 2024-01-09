@@ -1,11 +1,18 @@
 import { getSpecifiedPostData, getSpecifiedCommentData } from '@/app/libs/api-libs';
+import { IoArrowBackCircle } from 'react-icons/io5';
+import Link from 'next/link';
 
 const SpecifiedPage = async ({ params: { id } }) => {
   const postdata = await getSpecifiedPostData(`/posts/${id}`);
   const commentdata = await getSpecifiedCommentData(`/${id}`);
 
   return (
-    <main className="max-w-screen-md mx-auto p-5">
+    <main className="flex justify-center gap-5 max-w-screen-md mx-auto p-5">
+      <div>
+        <Link href="/posts">
+          <IoArrowBackCircle className="text-4xl text-teal-500 hover:text-teal-700" />
+        </Link>
+      </div>
       <section className="border border-gray-500 rounded-md shadow-xl p-5">
         <h1 className="font-bold text-2xl mb-5">{postdata.title}</h1>
         <p>{postdata.body}</p>

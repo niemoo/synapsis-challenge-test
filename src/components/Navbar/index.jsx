@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <header className="p-3 bg-teal-400">
+    <header className="p-3 bg-teal-400 shadow-lg">
       <nav className="max-w-screen-md mx-auto flex justify-center gap-5">
         <Link href="/" className="p-2 hover:bg-teal-500 text-white rounded-xl">
           Home
