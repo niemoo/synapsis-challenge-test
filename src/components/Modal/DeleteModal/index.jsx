@@ -12,8 +12,6 @@ const DeleteModal = ({ icon, title, userID }) => {
   const handleDeleteDataUser = async () => {
     try {
       const res = await axios.delete(`https://gorest.co.in/public/v2/users/${userID}?access-token=e835f26cf43cf244c017e2ae7ee7d26c03ae6495750eb08c5a5dccd5ec2d5568`);
-      console.log(res);
-      alert(`successfully deleted user ${userID}`);
       window.location.reload();
     } catch (err) {
       console.error(err);

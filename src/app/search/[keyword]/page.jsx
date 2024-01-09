@@ -25,7 +25,7 @@ const SearchPage = ({ params: { keyword } }) => {
   }, []);
 
   return (
-    <main className="flex justify-center gap-5 max-w-screen-md mx-auto p-5">
+    <main className="md:flex md:justify-center md:gap-5 max-w-screen-md mx-auto p-5">
       <div>
         <Link href="/users">
           <IoArrowBackCircle className="text-4xl text-teal-500 hover:text-teal-700" />

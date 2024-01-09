@@ -39,9 +39,6 @@ const EditModal = ({ icon, title, userID, oldName, oldEmail, oldGender, oldStatu
         status: status || oldStatus,
       });
 
-      if (res.status == 200) {
-        alert('Success Edit Data');
-      }
       window.location.reload();
     } catch (err) {
       console.log(userID);
