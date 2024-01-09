@@ -1,5 +1,7 @@
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
+import Button from '@/components/Button';
+import EditModal from '../EditModal';
 
 const UsersList = ({ data }) => {
   return (
@@ -14,14 +16,8 @@ const UsersList = ({ data }) => {
             <h3 className="text-sm text-gray-500">Status : {user.status}</h3>
           </div>
           <div className="flex gap-5 mt-5">
-            <button className="flex items-center gap-2 bg-green-400 hover:bg-green-500 border border-gray-400 py-1 px-2 rounded-md">
-              <FaUserEdit />
-              <p>Edit Data</p>
-            </button>
-            <button className="flex items-center gap-2 bg-red-500 hover:bg-red-700 border border-gray-400 py-1 px-2 rounded-md">
-              <MdDeleteForever />
-              <p>Delete Data</p>
-            </button>
+            <Button title="Edit Data" icon={<FaUserEdit />} modal={EditModal} className="bg-green-400 hover:bg-green-600" oldName={user.name} oldEmail={user.email} oldGender={user.gender} oldStatus={user.status} userID={user.id} />
+            <Button title="Delete Data" icon={<MdDeleteForever />} modal={EditModal} className="bg-red-400 hover:bg-red-700" oldName={user.name} oldEmail={user.email} oldGender={user.gender} oldStatus={user.status} userID={user.id} />
           </div>
         </div>
       ))}

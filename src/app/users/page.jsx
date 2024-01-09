@@ -1,8 +1,10 @@
 'use client';
-import AddBar from '@/components/AddBar';
+import AddButton from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
 import UsersList from '@/components/UsersList';
 import Pagination from '@/components/utils/Pagination';
+import AddModal from '@/components/AddModal';
+import { IoPersonAdd } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { getDataResponse } from '../libs/api-libs';
 
@@ -25,7 +27,7 @@ const UsersPage = () => {
   return (
     <main className="max-w-screen-md mx-auto p-5">
       <SearchBar />
-      <AddBar />
+      <AddButton title="Add New Data" icon={<IoPersonAdd className="text-xl" />} modal={AddModal} className=" bg-green-400 hover:bg-green-500" />
       <UsersList data={usersData} />
       <Pagination page={page} setPage={setPage} />
     </main>
